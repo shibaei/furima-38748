@@ -37,8 +37,19 @@ has_many :purchases
 belongs_to :user
 has_one :purchase
 
-
 ## purchasesテーブル
+
+|Column           |Type      |Options                      |
+|----------------|----------|------------------------------|
+|user            |references|null: false, foreign_key: true|
+|items           |references|null: false, foreign_key: true|
+
+### Association
+belongs_to :user
+belongs_to :item
+has_one :delivery
+
+## deliverysテーブル
 
 |Column           |Type      |Options                      |
 |----------------|----------|------------------------------|
@@ -48,10 +59,8 @@ has_one :purchase
 |block           |string    |null: false                   |
 |apartment       |string    |                              |
 |telephone_number|string    |null: false                   |
-|user            |references|null: false, foreign_key: true|
-|items           |references|null: false, foreign_key: true|
+|purchase        |references|null: false, foreign_key: true|
 
 
 ### Association
-belongs_to :user
-belongs_to :item
+belongs_to :purchase
