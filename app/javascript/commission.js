@@ -19,7 +19,7 @@ priceInput.addEventListener('input', function() {
   const price = priceInput.value;
   const commission = calcCommission(price);
   const profitValue = calcProfit(price, commission);
-  addTaxPrice.textContent = commission.toLocaleString();
-  profit.textContent = profitValue.toLocaleString();
+  addTaxPrice.innerHTML = commission.toLocaleString();
+  profit.innerHTML = profitValue.toLocaleString();
 });
 });
