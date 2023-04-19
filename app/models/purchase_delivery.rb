@@ -1,8 +1,9 @@
 class PurchaseDelivery
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postcode, :province, :locality, :block, :apartment, :telephone_number
+  attr_accessor :user_id, :item_id, :postcode, :province, :locality, :block, :apartment, :telephone_number, :token
 
   with_options presence: true do
+    validates :token
     validates :user_id
     validates :item_id
     validates :postcode, format: { with:  /\A\d{3}[-]\d{4}\z/, message: 'should be in the format of three digits, a hyphen, and four digits.' }
