@@ -1,13 +1,14 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, only: [:index, :create]
+  before_action :set_purchase, only: [:index, :create]
+  before_action :move_to_index, only: [:index, :create]
 
 def index
   @purchase_delivery = PurchaseDelivery.new
-  @item = Item.find(params[:item_id])
 end
 
 def create
-  @item = Item.find(params[:item_id])
   @purchase_delivery = PurchaseDelivery.new(donation_params)
   if @purchase_delivery.valid?
     pay_item
@@ -31,6 +32,22 @@ def pay_item
     card: donation_params[:token],
     currency: 'jpy'
   )
+end
+
+def set_item
+  @item = Item.find(params[:item_id])
+end
+
+def set_purchase
+  @purchase = Purchase.pluck(:item_id)
+end
+
+def move_to_index
+  return if current_user.id != @item.user_id && !@purchase.include?(@item.id)
+
+
+
+  redirect_to root_path
 end
 
 end

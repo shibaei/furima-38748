@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:edit, :update, :show, :move_to_index, :destroy]
+  before_action :set_purchase, only: [:index, :show, :edit, :destroy]
   before_action :move_to_index, only: [:edit, :destroy]
 
   def index
@@ -50,8 +51,12 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def set_purchase
+    @purchase = Purchase.pluck(:item_id)
+  end
+
   def move_to_index
-    return if current_user.id == @item.user_id
+    return if current_user.id == @item.user_id && !@purchase.include?(@item.id)
 
     redirect_to action: :index
   end
