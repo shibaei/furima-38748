@@ -57,17 +57,17 @@ RSpec.describe PurchaseDelivery, type: :model do
       it 'telephone_numberが9桁以下では購入できない' do
         @purchase_delivery.telephone_number = '123456789'
         @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include("Telephone number is invalid. Input 10-11 digits without any symbols.")
+        expect(@purchase_delivery.errors.full_messages).to include('Telephone number is invalid. Input 10-11 digits without any symbols.')
       end
       it 'telephone_numberが12桁以上では購入できない' do
         @purchase_delivery.telephone_number = '1234567891011'
         @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include("Telephone number is invalid. Input 10-11 digits without any symbols.")
+        expect(@purchase_delivery.errors.full_messages).to include('Telephone number is invalid. Input 10-11 digits without any symbols.')
       end
       it 'telephone_numberが半角数値以外では購入できない' do
         @purchase_delivery.telephone_number = '090-1234-5678'
         @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include("Telephone number is invalid. Input 10-11 digits without any symbols.")
+        expect(@purchase_delivery.errors.full_messages).to include('Telephone number is invalid. Input 10-11 digits without any symbols.')
       end
       it 'tokenが空では購入できないこと' do
         @purchase_delivery.token = nil
