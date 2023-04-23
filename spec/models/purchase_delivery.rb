@@ -29,42 +29,42 @@ RSpec.describe PurchaseDelivery, type: :model do
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include('Postcode should be in the format of three digits, a hyphen, and four digits.')
       end
-      it 'provinceが空では保存できない' do
+      it 'provinceが空では購入できない' do
         @purchase_delivery.province = ''
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("Province can't be blank")
       end
-      it 'provinceが1(---)では保存できない' do
+      it 'provinceが1(---)では購入できない' do
         @purchase_delivery.province = 1
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("Province can't be blank")
       end
-      it 'localityが空では保存できない' do
+      it 'localityが空では購入できない' do
         @purchase_delivery.locality = ''
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("Locality can't be blank")
       end
-      it 'blockが空では保存できない' do
+      it 'blockが空では購入できない' do
         @purchase_delivery.block = ''
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("Block can't be blank")
       end
-      it 'telephone_numberが空では保存できない' do
+      it 'telephone_numberが空では購入できない' do
         @purchase_delivery.telephone_number = ''
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("Telephone number can't be blank")
       end
-      it 'telephone_numberが9桁以下では保存できない' do
+      it 'telephone_numberが9桁以下では購入できない' do
         @purchase_delivery.telephone_number = '123456789'
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("Telephone number is invalid. Input 10-11 digits without any symbols.")
       end
-      it 'telephone_numberが12桁以上では保存できない' do
+      it 'telephone_numberが12桁以上では購入できない' do
         @purchase_delivery.telephone_number = '1234567891011'
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("Telephone number is invalid. Input 10-11 digits without any symbols.")
       end
-      it 'telephone_numberが半角数値以外では保存できない' do
+      it 'telephone_numberが半角数値以外では購入できない' do
         @purchase_delivery.telephone_number = '090-1234-5678'
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("Telephone number is invalid. Input 10-11 digits without any symbols.")
@@ -79,7 +79,7 @@ RSpec.describe PurchaseDelivery, type: :model do
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("User can't be blank")
       end
-      it 'userが紐付いていないと購入できないこと' do
+      it 'itemが紐付いていないと購入できないこと' do
         @purchase_delivery.item_id = nil
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("Item can't be blank")
